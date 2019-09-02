@@ -8,8 +8,8 @@ defmodule LineBot.BodyReaderPlug do
   def init(_opts), do: nil
 
   @impl true
-  def call(conn, _opts) do
-    case Plug.Conn.read_body(conn) do
+  def call(conn, opts) do
+    case Plug.Conn.read_body(conn, opts) do
       {:ok, body, conn} ->
         put_private(conn, :line_bot_raw_body, body)
 

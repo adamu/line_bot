@@ -1,13 +1,16 @@
 defmodule LineBot.MixProject do
   use Mix.Project
 
+  @version "0.1.0"
+
   def project do
     [
       app: :line_bot,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      source_url: "https://github.com/adamu/line_bot",
       docs: docs()
     ]
   end
@@ -24,7 +27,7 @@ defmodule LineBot.MixProject do
     [
       main: "readme",
       extras: ["README.md"],
-      # source_ref: "v#{@version}",
+      source_ref: "v#{@version}",
       groups_for_modules: [
         LineBot: [
           LineBot,
