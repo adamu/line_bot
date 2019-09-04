@@ -46,12 +46,4 @@ defmodule LineBot.ValidatorPlug do
     |> send_resp(:forbidden, "Signature Invalid")
     |> halt
   end
-
-  @doc """
-  A helper for local debugging. Produces a valid signature for the supplied `body`,
-  which can be used in the `X-Line-Signature` header.
-  """
-  def sign(body) do
-    :crypto.hmac(:sha256, Application.get_env(:line_bot, :client_secret), body) |> Base.encode64()
-  end
 end
