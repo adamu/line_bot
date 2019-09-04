@@ -62,7 +62,9 @@ The forwarded URL should be whatever you specified as the callback URI on the Li
 
 For detailed instructions, see `LineBot.Webhook`. You can also check the [sample application](../sample/lib/line_bot_sample/router.ex).
 
-## Not supported
+## Not implemented
+
+### Rich Menu API
 
 The [Rich Menu API](https://developers.line.biz/en/reference/messaging-api/#rich-menu) is not currently implemented, although `LineBot.APIClient` can be used to call the API manually.
 
@@ -89,6 +91,10 @@ And get like this:
 ```elixir
 LineBot.APIClient.get("richmenu/list")
 ```
+
+### Flex Message Update
+
+Recent additions to the Flex message API have not been added yet. This will be the first feature to be implemented after initial release.
 
 ## TODO
 

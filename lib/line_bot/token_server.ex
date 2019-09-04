@@ -1,4 +1,6 @@
 defmodule LineBot.TokenServer do
+  @http Application.get_env(:line_bot, :api_client, HTTPoison)
+
   defmodule Behaviour do
     @moduledoc false
     @callback get_token() :: binary
@@ -77,7 +79,7 @@ defmodule LineBot.TokenServer do
 
     %{"access_token" => access_token, "expires_in" => expires_in} =
       "https://api.line.me/v2/oauth/accessToken"
-      |> HTTPoison.post!({:form, data}, @headers)
+      |> @http.post!({:form, data}, @headers)
       |> Map.get(:body)
       |> Jason.decode!()
 
@@ -85,7 +87,7 @@ defmodule LineBot.TokenServer do
   end
 
   defp post_revoke_token(access_token) do
-    HTTPoison.post!(
+    @http.post!(
       "https://api.line.me/v2/oauth/revoke",
       {:form, [access_token: access_token]},
       @headers

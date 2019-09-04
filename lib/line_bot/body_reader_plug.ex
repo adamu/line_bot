@@ -5,7 +5,7 @@ defmodule LineBot.BodyReaderPlug do
   @moduledoc false
 
   @impl true
-  def init(_opts), do: nil
+  def init(_opts), do: []
 
   @impl true
   def call(conn, opts) do
