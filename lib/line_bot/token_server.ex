@@ -68,7 +68,12 @@ defmodule LineBot.TokenServer do
     %{state | token: token, expires_on: expires_on}
   end
 
-  @headers [{"Content-Type", "application/x-www-form-urlencoded"}]
+  defp headers do
+    [
+      {"Content-Type", "application/x-www-form-urlencoded"},
+      {"User-Agent", "line-botsdk-elixir/v#{Application.spec(:line_bot, :vsn)}"}
+    ]
+  end
 
   defp post_request_token(client_id, client_secret) do
     data = [
@@ -79,7 +84,7 @@ defmodule LineBot.TokenServer do
 
     %{"access_token" => access_token, "expires_in" => expires_in} =
       "https://api.line.me/v2/oauth/accessToken"
-      |> @http.post!({:form, data}, @headers)
+      |> @http.post!({:form, data}, headers())
       |> Map.get(:body)
       |> Jason.decode!()
 
@@ -90,7 +95,7 @@ defmodule LineBot.TokenServer do
     @http.post!(
       "https://api.line.me/v2/oauth/revoke",
       {:form, [access_token: access_token]},
-      @headers
+      headers()
     )
   end
 

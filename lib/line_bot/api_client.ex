@@ -57,9 +57,16 @@ defmodule LineBot.APIClient do
   @doc """
   Adds the OAuth Bearer token to the `Authorization` header.
   The token is retrieved by calling `LineBot.TokenServer.get_token/0`.
+
+  Also adds the `User-Agent` header with a value of `line-botsdk-elixir/vX.X.X`.
+  This follows the pattern of Line Bot libraries in other languages.
   """
   def process_request_headers(headers) do
-    [{"Authorization", "Bearer #{@token_server.get_token()}"} | super(headers)]
+    [
+      {"Authorization", "Bearer #{@token_server.get_token()}"},
+      {"User-Agent", "line-botsdk-elixir/v#{Application.spec(:line_bot, :vsn)}"}
+      | super(headers)
+    ]
   end
 
   @impl HTTPoison.Base

@@ -33,14 +33,20 @@ defmodule LineBot.APIClientTest do
       assert %{"foo" => "bar"} == APIClient.process_response(response).body
     end
 
-    test "process_request_headers adds auth header from token server" do
+    test "process_request_headers adds auth and user-agent headers" do
       expect(MockTokenServer, :get_token, fn -> "dummy_token" end)
       expect(MockTokenServer, :get_token, fn -> "changed_token" end)
 
-      assert [{"Authorization", "Bearer dummy_token"}] == APIClient.process_request_headers([])
+      assert [
+               {"Authorization", "Bearer dummy_token"},
+               {"User-Agent", "line-botsdk-elixir/v" <> _}
+             ] = APIClient.process_request_headers([])
 
-      assert [{"Authorization", "Bearer changed_token"}, {"other", "header"}] ==
-               APIClient.process_request_headers([{"other", "header"}])
+      assert [
+               {"Authorization", "Bearer changed_token"},
+               {"User-Agent", "line-botsdk-elixir/v" <> _},
+               {"other", "header"}
+             ] = APIClient.process_request_headers([{"other", "header"}])
     end
 
     # TODO these call super. Not sure how to test them without calling HTTPoison.
