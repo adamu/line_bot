@@ -62,8 +62,6 @@ defmodule LineBot.TokenServerTest do
     test "when token has expired, fetches and returns new token, and adds it to state", %{
       state: state
     } do
-      headers = [{"Content-Type", "application/x-www-form-urlencoded"}]
-
       data = [
         grant_type: "client_credentials",
         client_id: @client_id,
@@ -72,7 +70,10 @@ defmodule LineBot.TokenServerTest do
 
       expect(MockAPIClient, :post!, fn "https://api.line.me/v2/oauth/accessToken",
                                        {:form, ^data},
-                                       ^headers ->
+                                       [
+                                         {"Content-Type", "application/x-www-form-urlencoded"},
+                                         {"User-Agent", "line-botsdk-elixir/v" <> _}
+                                       ] ->
         %{body: ~S'{"access_token":"new token", "expires_in":1000}'}
       end)
 
@@ -96,7 +97,10 @@ defmodule LineBot.TokenServerTest do
     test "calls purge API and sets token to nil and expiry to an expired date", %{state: state} do
       expect(MockAPIClient, :post!, fn "https://api.line.me/v2/oauth/revoke",
                                        {:form, [access_token: "original token"]},
-                                       [{"Content-Type", "application/x-www-form-urlencoded"}] ->
+                                       [
+                                         {"Content-Type", "application/x-www-form-urlencoded"},
+                                         {"User-Agent", "line-botsdk-elixir/v" <> _}
+                                       ] ->
         :ok
       end)
 
