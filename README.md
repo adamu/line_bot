@@ -14,7 +14,7 @@ Add `:line_bot` to your mix deps:
 ```elixir
 defp deps do
   [
-    {:line_bot, path: "~> 0.1.0"}
+    {:line_bot, "~> 0.1.0"}
   ]
 end
 ```
