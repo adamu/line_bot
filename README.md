@@ -14,7 +14,7 @@ Add `:line_bot` to your mix deps:
 ```elixir
 defp deps do
   [
-    {:line_bot, path: "../"}
+    {:line_bot, path: "~> 0.1.0"}
   ]
 end
 ```
@@ -48,7 +48,7 @@ config :line_bot,
 
 The recommended way to do this is to `use LineBot`, which will create default callbacks handlers, and then override the events you want to handle. The default implementations return without doing anything.
 
-An example is available in the [sample application](../sample/lib/line_bot_sample.ex).
+An example is available in the [sample application](https://github.com/adamu/line_bot/tree/master/sample).
 
 ### 3. Forward webhook requests to `LineBot.Webhook`, and tell it your callback module.
 
@@ -60,7 +60,7 @@ forward "/bot", to: LineBot.Webhook, callback: YourCallbackModule
 
 The forwarded URL should be whatever you specified as the callback URI on the Line Developers site.
 
-For detailed instructions, see `LineBot.Webhook`. You can also check the [sample application](../sample/lib/line_bot_sample/router.ex).
+For detailed instructions, see `LineBot.Webhook`. You can also check the [sample application](https://github.com/adamu/line_bot/tree/master/sample).
 
 ## Not implemented
 
@@ -94,10 +94,4 @@ LineBot.APIClient.get("richmenu/list")
 
 ### Flex Message Update
 
-Recent additions to the Flex message API have not been added yet. This will be the first feature to be implemented after initial release.
-
-## TODO
-
-* [ ] Tests
-* [ ] Static resources
-* [ ] Update post-publish sample links.
+Recent additions to the Flex message API have not been added yet.

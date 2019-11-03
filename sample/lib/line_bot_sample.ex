@@ -3,8 +3,6 @@ defmodule LineBotSample do
   require Logger
 
   alias LineBot.Message
-  # TODO update static resource locations
-
   # ----------------------------------------------------------------------------
   # Helpers
   # ----------------------------------------------------------------------------
