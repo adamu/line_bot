@@ -10,8 +10,21 @@ defmodule LineBot.MixProject do
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      package: package(),
       source_url: "https://github.com/adamu/line_bot",
+      description: "A package for creating chatbots with the Line messenger",
       docs: docs()
+    ]
+  end
+
+  defp package do
+    [
+      licenses: ["Apache 2.0"],
+      links: %{
+        "Messaging API Documentation" => "https://developers.line.biz/en/services/messaging-api/",
+        "GitHub" => "https://github.com/adamu/line_bot",
+        "Sample Bot" => "https://github.com/adamu/line_bot/tree/master/sample"
+      }
     ]
   end
 
