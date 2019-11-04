@@ -95,3 +95,9 @@ LineBot.APIClient.get("richmenu/list")
 ### Flex Message Update
 
 Recent additions to the Flex message API have not been added yet.
+
+## Online Documentation
+
+Documentation for this package is available online at [Hexdocs](https://hexdocs.pm/line_bot/) and interactively in iex via [`h/1`](https://hexdocs.pm/iex/IEx.Helpers.html#h/1), for example:
+
+    iex> h LineBot
