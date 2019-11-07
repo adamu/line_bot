@@ -182,9 +182,7 @@ defmodule LineBotSample do
       code
       |> String.trim()
       |> String.upcase()
-      |> String.to_charlist()
-      |> Enum.map(&(&1 + 0x1F1A5))
-      |> List.to_string()
+      |> (&for(<<cp::utf8 <- &1>>, into: "", do: <<cp + 0x1F1A5::utf8>>)).()
 
     log_and_reply(request_message, %Message.Text{text: code}, reply_token)
   end
